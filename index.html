@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1026">
+<title>11:11 — أمنيتنا</title>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   كل اللي عايز تغيّره في الموقع موجود هنا، في السكشن ده بس:
+   الأسماء، السنة، النصوص، الذكريات، الجواب، الألوان…
+   اللي تحت السكشن ده كود، مش محتاج تلمسه.
+   (الحاجات اللي بين { } زي {year} بتتبدّل لوحدها، متمسحهاش)
+   ═══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+
+  /* 1) الأساسيات */
+  title: '11:11 — أمنيتنا',               // عنوان التبويب
+  nameA: '[poula]',                        // اسمك
+  nameB: '[maria(rito)]',                   // اسمها
+  timezone: 'Africa/Cairo',
+  // لحظة بداية حكايتكم: العدّاد بيحسب منها، وتاريخ الانفرسي (الشهر واليوم) بيتاخد منها
+  start: { year: 2025, month: 11, day: 11, hour: 23, minute: 11 },
+
+  /* 2) الألوان */
+  theme: { gold: '#f5c96a', lav: '#b9a7ff', ink: '#1a1f4d', tx: '#f4f1ea' },
+
+  /* 3) حكايتنا: فصل لكل سنة بالترتيب من سنة البداية، كل فصل [العنوان، النص، اسم صورة الفصل (اختياري)] */
+  chapters: [
+    ['البداية', '11/11 الساعة 11:11  الدقيقة اللي بدأت فيها حكايتنا.', '2025.jpg'], 
+    ['سنتنا الاولي', 'احلي سنه عدت علي علشان انتي معايا فيها .'],
+    ['سنتنا التانية', 'TODO: ذكريات السنة دي.'],
+    ['سنتنا التالتة', 'TODO: ذكريات السنة دي.']
+  ],
+  icons: ['🌙', '⭐', '✨', '🌠'],          // إيموجي لكل فصل بالترتيب
+
+  /* 4) الـ 11 كارت: كل كارت بيتقلب ويظهر النص بتاعه */
+  cards: [
+    'أول حاجة قلناها لبعض',
+    'قفشة محدش يفهمها غيرنا',
+    'أكلة بنتخانق عليها',
+    'مكان نفسنا نروحه',
+    'أغنية بتفكّرنا ببعض',
+    'موقف ضحكنا فيه لحد الصبح',
+    'حاجة اتعلمناها من بعض',
+    'مغامرة فاشلة بس حلوة',
+    'جملة بنقولها كتير',
+    'أصعب يوم وعدّى',
+    'أمنية نفسنا تتحقق'
+  ],
+
+  /* 5) ألبوم الصور: حط الصور في فولدر اسمه photos جنب index.html (اسم الصورة بالإنجليزي من غير مسافات)،
+        وسجّل كل صورة هنا [اسم الملف، التعليق]. زوّد أو امسح براحتك */
+  photoDir: '',
+  photos: [
+    ['01.jpg', '2024'],
+    ['02.jpg', '2025'],
+    ['03.jpg', '2025'],
+    ['04.jpg', '2026'],
+    ['05.jpg', '2026'],
+    ['06.jpg', '2026']
+  ],
+
+  /* 6) الجواب الأخير (سطر فاضي = فقرة جديدة) */
+  letter: ` ماريا انا عايز اقولك بجد انا بحبك حب انت مش متخيلاه و بجد اسف ل عملت حاجه ضايقتك عديها عادي انا بحبك و هفضل احبك طول الوقت`,
+
+  /* 7) الغرفة السرية: بتفتح لو اتكتب الكود على الكيبورد، أو اتضغط على 11:11 في آخر الصفحة بعدد الضغطات ده */
+  secret: {
+    code: '1111',
+    taps: 11,
+    title: 'الغرفة السرية',
+    text: 'يا رب يديننا طول العمر علشان افضل انكشك علي طول '
+  },
+
+  /* 8) مفاجآت الوقت: لو الموقع مفتوح في الدقيقة دي (بتوقيت القاهرة) بتظهر الرسالة، مرة في اليوم */
+  moments: [
+    { hour: 23, minute: 11, title: '11:11 بالليل', text: 'الدقيقة اللي بدأت فيها حكايتنا. اتمنّوا أمنية. ✨' },
+    { hour: 11, minute: 11, title: '11:11 — دلوقتي!', text: 'اتمنّوا أمنية دلوقتي، الوقت ده بتاعنا. ✨' }
+  ],
+
+  /* 9) باقي النصوص اللي على الصفحة */
+  gateMark: '11/11',                       // الرقم اللي بتتشكّل منه النجوم في الافتتاحية
+  units: ['سنة', 'شهر', 'يوم', 'ساعة', 'دقيقة', 'ثانية'],
+  text: {
+    big: '11:11',
+    gateTitle: 'اتمنّى أمنية',
+    gateBtn: 'اتمنّى',
+    skip: 'تخطّي',
+    and: 'و',
+    tagline: 'كل 11/11 بنفتح فصل جديد من حكايتنا',
+    since: 'من 11/11/{year} الساعة 11:11 بالليل',
+    today: 'النهارده يومنا 🎉',
+    countdown: 'باقي {d} يوم و {t} على 11/11 الجاي',
+    hStory: 'حكايتنا',
+    hCards: '11 حاجة',
+    hPhotos: 'صورنا',
+    hWishes: 'صندوق الأمنيات',
+    hLetter: 'جواب أخير',
+    chapterAuto: ['فصل {year}', 'TODO: ذكريات السنة دي.'],
+    nextTitle: 'الفصل الجاي',
+    nextText: 'بيتكتب في 11/11/{year}',
+    wishWho: 'مين بيتمنّى',
+    wishHint: 'اكتبوا الأمنية هنا…',
+    wishBtn: 'اقفلها لحد 11/11 الجاي 🔒',
+    wishNote: '',
+    wishSealed: 'مقفولة لحد 11/11/{year}',
+    wishEmpty: 'لسه مفيش أمنيات. اكتبوا أول واحدة.',
+    showAll: 'اعرضه كله',
+    wishNow: 'اتمنّى ✨',
+    ok: 'تمام'
+  }
+};
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1f4d;--gold:#f5c96a;--lav:#b9a7ff;--tx:#f4f1ea;--mut:#b8b6d6;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:#0b1026 linear-gradient(#0b1026,#1a1f4d) fixed;color:var(--tx);font:400 17px/1.9 Cairo,system-ui,sans-serif;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+#sky{z-index:0}#fx{z-index:60;pointer-events:none}
+main{position:relative;z-index:1}
+.s{max-width:720px;margin:0 auto;padding:72px 22px}
+h2{font:700 2.1rem/1.4 'Aref Ruqaa',serif;color:var(--gold);margin:0 0 28px}
+button,select,textarea{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+.big{font:700 clamp(4.5rem,24vw,9rem)/1 Cairo,sans-serif;margin:0;color:var(--gold);direction:ltr;text-shadow:0 0 28px rgba(245,201,106,.55),0 0 90px rgba(185,167,255,.4)}
+.bt{background:var(--gold);color:#241b00;border:0;border-radius:999px;padding:12px 28px;font-weight:700;min-height:44px}
+.gh,.sl{background:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:10px 20px;min-height:44px}
+.sl{border:0;color:var(--mut);text-decoration:underline}
+#gate{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 40%,#1a1f4d,#0b1026 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px;transition:opacity .9s}
+#gate.out{opacity:0;pointer-events:none}
+#gate .big{font-size:clamp(5rem,28vw,11rem);animation:gl 3s ease-in-out infinite alternate}
+@keyframes gl{to{text-shadow:0 0 50px rgba(245,201,106,.9),0 0 140px rgba(185,167,255,.7)}}
+#gc{position:absolute;pointer-events:none}
+.gi{display:flex;flex-direction:column;align-items:center;gap:14px}.gi p{margin:0;font:700 1.5rem 'Aref Ruqaa',serif}
+#gate.mo .big,#gate.mo .gi{opacity:0;transition:opacity .5s}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.nm{font:700 1.6rem 'Aref Ruqaa',serif;margin:10px 0 0}.tg{margin:0;color:var(--mut)}
+.cnt{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 24px;margin:26px 0 6px}
+.cnt b{display:block;font:700 2.3rem/1.2 Cairo,sans-serif;font-variant-numeric:tabular-nums}.cnt span{font-size:.85rem;color:var(--mut)}
+#cd{color:var(--lav);font-weight:600;margin:0}
+.tl{list-style:none;margin:0;padding:0 26px 0 0;border-inline-start:2px solid rgba(185,167,255,.35);padding-inline-start:26px;padding-inline-end:0}
+.ch{position:relative;margin:0 0 44px;display:grid;grid-template-columns:130px 1fr;gap:18px;align-items:center}
+.ch::before{content:"";position:absolute;inset-inline-start:-34px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.pol{width:130px;aspect-ratio:1;display:grid;place-items:center;font-size:2.4rem;border:8px solid #f4f1ea;border-bottom-width:22px;border-radius:3px;transform:rotate(-3deg)}
+.ch:nth-child(even) .pol{transform:rotate(3deg)}
+.ch h3{margin:0;color:var(--gold);font:700 1.3rem 'Aref Ruqaa',serif}.ch small{color:var(--mut);font:400 .9rem Cairo}.ch p{margin:2px 0 0;color:var(--mut)}
+.nx{opacity:.55}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+.gal{columns:2;column-gap:14px}
+.ph{display:block;width:100%;break-inside:avoid;margin:0 0 16px;padding:0 0 4px;background:#f4f1ea;color:#2b2540;border:0;border-radius:3px;box-shadow:0 10px 30px rgba(0,0,0,.4);transform:rotate(var(--r,0deg));transition:transform .3s}
+.ph:hover{transform:none}
+.ph span{display:block;padding:8px 10px 10px;font:700 1rem/1.4 'Aref Ruqaa',serif}
+.im{margin:8px 8px 0;border-radius:2px;overflow:hidden;background:linear-gradient(135deg,#3a3f86,#7d6bd6);min-height:90px;display:grid;place-items:center}
+.im.no{min-height:130px}.im.no::before{content:"📷";font-size:2rem}
+.im img{width:100%;display:block}
+.pol{position:relative;overflow:hidden}.pol img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#lb{position:fixed;inset:0;z-index:70;background:rgba(5,7,20,.92);display:grid;place-items:center;padding:20px;text-align:center}
+#lb[hidden]{display:none}#lb img{max-width:100%;max-height:72vh;border-radius:6px}#lb p{font:700 1.2rem 'Aref Ruqaa',serif;margin:10px 0 14px}
+@media(min-width:620px){.gal{columns:3}}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.fc{position:relative;height:130px;background:none;border:0;padding:0;perspective:700px}
+.fc i{position:absolute;inset:0;display:grid;place-items:center;padding:10px;border-radius:14px;backface-visibility:hidden;font-style:normal;transition:transform .6s}
+.fc .f{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);font:700 2.4rem Cairo,sans-serif;color:var(--gold)}
+.fc .b{background:var(--lav);color:#15163a;transform:rotateY(180deg);font-size:.92rem;line-height:1.6}
+.fc[aria-pressed=true] .f{transform:rotateY(180deg)}.fc[aria-pressed=true] .b{transform:none}
+form{display:grid;gap:10px}
+select,textarea{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:10px 12px}
+option{color:#111}
+.nt{font-size:.85rem;color:var(--mut);margin:8px 0 0}
+#wl{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}#wl li{padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.06)}
+.lt{background:#f4f1ea;color:#2b2540;font:700 1.25rem/2.1 'Aref Ruqaa',serif;padding:30px 26px;border-radius:4px;min-height:260px;white-space:pre-line;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+footer{text-align:center;padding:20px 0 60px;position:relative;z-index:1}
+#mk{background:none;border:0;color:var(--mut);font:700 1.1rem Cairo,sans-serif;direction:ltr;min-height:44px;min-width:44px}
+#md{position:fixed;inset:0;z-index:70;background:rgba(5,7,20,.85);display:grid;place-items:center;padding:24px}
+#md[hidden]{display:none}
+#md div{max-width:420px;background:var(--ink);border:1px solid var(--lav);border-radius:16px;padding:28px;text-align:center}
+#md h2{margin:0 0 10px}
+@media(max-width:480px){.ch{grid-template-columns:96px 1fr}.pol{width:96px;font-size:1.8rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas><canvas id="fx"></canvas>
+<div id="gate"><canvas id="gc"></canvas><div class="big" data-t="big"></div><div class="gi"><p data-t="gateTitle"></p><button class="bt" id="go" data-t="gateBtn"></button><button class="sl" id="sg" data-t="skip"></button></div></div>
+<main>
+<section class="s hero"><h1 class="big" data-t="big"></h1><p class="nm"></p><p class="tg" data-t="tagline"></p><div class="cnt" id="cn"></div><p class="nt" id="since"></p><p id="cd"></p></section>
+<section class="s"><h2 data-t="hStory"></h2><ol class="tl" id="tl"></ol></section>
+<section class="s"><h2 data-t="hPhotos"></h2><div class="gal" id="gal"></div></section>
+<section class="s"><h2 data-t="hCards"></h2><div class="cg" id="cg"></div></section>
+<section class="s"><h2 data-t="hWishes"></h2>
+<form id="wf"><select id="ws" data-al="wishWho"></select><textarea id="wt" rows="3" maxlength="300" data-ph="wishHint" required></textarea><button class="bt" data-t="wishBtn"></button></form>
+<p class="nt" data-t="wishNote"></p><ul id="wl"></ul></section>
+<section class="s"><h2 data-t="hLetter"></h2><div class="lt" id="lt"></div><div class="row"><button class="gh" id="sk" data-t="showAll"></button><button class="bt" id="wh" data-t="wishNow"></button></div></section>
+</main>
+<footer><button id="mk" data-t="big"></button></footer>
+<div id="lb" role="dialog" aria-modal="true" aria-label="صورة" hidden><div><img alt=""><p></p><button class="bt" id="lc" data-t="ok"></button></div></div>
+<div id="md" role="dialog" aria-modal="true" aria-labelledby="mt" hidden><div><h2 id="mt"></h2><p id="mx"></p><button class="bt" id="mc" data-t="ok"></button></div></div>
+<script>
+/* ═══ الكود: مش محتاج تغيّر حاجة من هنا لتحت، كل التعديلات في CONFIG فوق ═══ */
+const C=CONFIG,X=C.text,AN=C.start;
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,pad=n=>String(n).padStart(2,'0');
+const fm=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
+const ST=(k,v)=>{try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}};
+const FM=new Intl.DateTimeFormat('en-GB',{timeZone:C.timezone,year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',hourCycle:'h23'});
+const P=()=>{const o={};FM.formatToParts(new Date()).forEach(p=>o[p.type]=+p.value);return o};
+const esc=s=>s.replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const aft=p=>p.month>AN.month||(p.month==AN.month&&p.day>=AN.day);
+let rdy=0;
+document.title=C.title;
+Object.entries(C.theme).forEach(([k,v])=>document.documentElement.style.setProperty('--'+k,v));
+document.querySelectorAll('[data-t]').forEach(e=>e.textContent=X[e.dataset.t]);
+document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=X[e.dataset.ph]);
+document.querySelectorAll('[data-al]').forEach(e=>e.setAttribute('aria-label',X[e.dataset.al]));
+/* sky */
+const sk=$('#sky'),sx=sk.getContext('2d');let S=[],W,H;
+function rs(){const d=Math.min(devicePixelRatio||1,2);W=sk.width=innerWidth*d;H=sk.height=innerHeight*d;S=Array.from({length:Math.min(140,W*H/9000|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.4+.4)*d,p:Math.random()*6.3,s:Math.random()*.02+.005}));$('#fx').width=innerWidth;$('#fx').height=innerHeight}
+function ds(){sx.clearRect(0,0,W,H);S.forEach(s=>{s.p+=s.s;sx.globalAlpha=.4+.6*Math.abs(Math.sin(s.p));sx.fillStyle='#fff';sx.beginPath();sx.arc(s.x,s.y,s.r,0,6.3);sx.fill()});if(!RM)requestAnimationFrame(ds)}
+rs();ds();addEventListener('resize',()=>{rs();if(RM)ds()});
+/* effects */
+const fx=$('#fx'),fc=fx.getContext('2d');let FP=[],run=0;
+function burst(x,y,n=70){const h=Math.random()*60+30;for(let i=0;i<n;i++){const a=Math.random()*6.283,s=Math.random()*5+1;FP.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c:`hsl(${h+Math.random()*40},90%,65%)`,g:.06,r:2})}go()}
+function rain(){for(let i=0;i<120;i++)FP.push({x:Math.random()*innerWidth,y:-20-Math.random()*300,vx:Math.random()*2-1,vy:Math.random()*3+2,l:1,c:`hsl(${Math.random()*360},85%,65%)`,g:.02,r:4,q:1});go()}
+function go(){if(run)return;run=1;(function f(){fc.clearRect(0,0,fx.width,fx.height);FP=FP.filter(p=>p.l>0&&p.y<fx.height+30);FP.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.l-=p.q?.004:.014;fc.globalAlpha=Math.max(p.l,0);fc.fillStyle=p.c;if(p.q)fc.fillRect(p.x,p.y,p.r*1.5,p.r);else{fc.beginPath();fc.arc(p.x,p.y,p.r,0,6.3);fc.fill()}});fc.globalAlpha=1;if(FP.length)requestAnimationFrame(f);else{run=0;fc.clearRect(0,0,fx.width,fx.height)}})()}
+function fireworks(){if(RM)return;for(let i=0;i<7;i++)setTimeout(()=>burst(innerWidth*(.15+Math.random()*.7),innerHeight*(.15+Math.random()*.4)),i*600)}
+function celebrate(){if(RM)return;rain();fireworks()}
+/* modal + secret room */
+const md=$('#md'),SC=C.secret,sec=()=>openM(SC.title,SC.text);let kb='',mt=0,mtm;
+function openM(t,x){$('#mt').textContent=t;$('#mx').textContent=x;md.hidden=false;$('#mc').focus()}
+$('#mc').onclick=()=>md.hidden=true;
+addEventListener('keydown',e=>{if(e.key==='Escape'){md.hidden=true;$('#lb').hidden=true}if(e.key==='Tab'&&(!md.hidden||!$('#lb').hidden)){e.preventDefault();$(md.hidden?'#lc':'#mc').focus()}
+if(/^\d$/.test(e.key)&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)){kb=(kb+e.key).slice(-SC.code.length);if(kb===SC.code)sec()}});
+$('#mk').onclick=()=>{clearTimeout(mtm);if(++mt>=SC.taps){mt=0;sec()}else mtm=setTimeout(()=>mt=0,4000)};
+/* gate */
+function enter(){const g=$('#gate');try{sessionStorage.g=1}catch(e){}g.classList.add('out');setTimeout(()=>{g.remove();rdy=1;const p=P();if(p.month==AN.month&&p.day==AN.day&&ST('cf')!==''+p.year){ST('cf',''+p.year);celebrate()}},RM?0:900)}
+function morph(){const g=$('#gate'),cv=$('#gc'),x=cv.getContext('2d'),w=cv.width=innerWidth,h=cv.height=innerHeight,o=document.createElement('canvas');o.width=w;o.height=h;const q=o.getContext('2d');
+q.font='700 '+Math.min(w*.3,h*.28)+'px Cairo,sans-serif';q.textAlign='center';q.textBaseline='middle';q.fillStyle='#fff';q.fillText(C.gateMark,w/2,h/2);
+const d=q.getImageData(0,0,w,h).data,st=Math.max(3,w/130|0);let A=[];
+for(let y=0;y<h;y+=st)for(let u=0;u<w;u+=st)if(d[(y*w+u)*4+3]>128)A.push({x:Math.random()*w,y:Math.random()*h,tx:u,ty:y,r:Math.random()*1.3+.8});
+if(A.length>1200)A=A.filter(()=>Math.random()<1200/A.length);
+g.classList.add('mo');const t0=performance.now();
+(function f(t){x.clearRect(0,0,w,h);x.fillStyle=C.theme.gold;A.forEach(a=>{a.x+=(a.tx-a.x)*.06;a.y+=(a.ty-a.y)*.06;x.beginPath();x.arc(a.x,a.y,a.r,0,6.3);x.fill()});if(t-t0<2600)requestAnimationFrame(f);else enter()})(t0)}
+$('#go').onclick=()=>RM?enter():morph();$('#sg').onclick=enter;
+try{if(sessionStorage.g){$('#gate').remove();rdy=1}}catch(e){}
+/* content */
+$('.nm').textContent=`${C.nameA} ${X.and} ${C.nameB}`;
+$('#since').textContent=fm(X.since,{year:AN.year});
+$('#cn').innerHTML=C.units.map(l=>`<div><b>0</b><span>${l}</span></div>`).join('');
+const nb=[...document.querySelectorAll('#cn b')];
+(function(){const p=P(),ly=aft(p)?p.year:p.year-1;let h='';
+for(let i=0,Y=AN.year;Y<=ly;i++,Y++){const t=C.chapters[i]||[fm(X.chapterAuto[0],{year:Y}),X.chapterAuto[1]];
+h+=`<li class="ch rv"><div class="pol" style="background:linear-gradient(135deg,hsl(${230+i*28},55%,38%),hsl(${270+i*28},60%,52%))">${C.icons[i%C.icons.length]}${t[2]?`<img src="${C.photoDir+t[2]}" alt="" loading="lazy" onerror="this.remove()">`:''}</div><div><h3>${t[0]} <small>${Y}</small></h3><p>${t[1]}</p></div></li>`}
+h+=`<li class="ch nx"><div class="pol" style="background:#2a2f66">🔒</div><div><h3>${X.nextTitle} <small>${ly+1}</small></h3><p>${fm(X.nextText,{year:ly+1})}</p></div></li>`;$('#tl').innerHTML=h})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll('.rv').forEach(x=>io.observe(x));
+$('#cg').innerHTML=C.cards.map((t,i)=>`<button class="fc" aria-pressed="false"><i class="f">${i+1}</i><i class="b">${t}</i></button>`).join('');
+$('#cg').onclick=e=>{const b=e.target.closest('.fc');if(b)b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true')};
+/* photos */
+$('#gal').innerHTML=C.photos.map((p,i)=>`<button class="ph" style="--r:${[-2,1.5,-1,2.5][i%4]}deg" data-i="${i}"><div class="im"><img src="${C.photoDir+p[0]}" alt="${esc(p[1])}" loading="lazy" onerror="this.parentNode.classList.add('no');this.remove()"></div><span>${esc(p[1])}</span></button>`).join('');
+$('#gal').onclick=e=>{const b=e.target.closest('.ph');if(!b||b.querySelector('.no'))return;const p=C.photos[b.dataset.i],l=$('#lb');l.querySelector('img').src=C.photoDir+p[0];l.querySelector('p').textContent=p[1];l.hidden=false;$('#lc').focus()};
+$('#lc').onclick=()=>$('#lb').hidden=true;
+$('#lb').onclick=e=>{if(e.target.id==='lb')e.target.hidden=true};
+/* wishes */
+$('#ws').innerHTML=[C.nameA,C.nameB].map(n=>`<option>${esc(n)}</option>`).join('');
+const WL=()=>{try{return JSON.parse(ST('w')||'[]')}catch(e){return[]}};
+function wl(){const p=P(),now=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second);
+$('#wl').innerHTML=WL().map(x=>{const u=now>=Date.UTC(x.u,AN.month-1,AN.day);return `<li>${u?'💌':'🔒'} <b>${esc(x.n)}</b> — ${u?esc(x.t):fm(X.wishSealed,{year:x.u})}</li>`}).join('')||`<li>${X.wishEmpty}</li>`}
+$('#wf').onsubmit=e=>{e.preventDefault();const t=$('#wt').value.trim();if(!t)return;const p=P(),w=WL();w.push({n:$('#ws').value,t,u:aft(p)?p.year+1:p.year});ST('w',JSON.stringify(w));$('#wt').value='';wl();if(!RM)burst(innerWidth/2,innerHeight/2,40)};
+wl();
+/* letter */
+const lt=$('#lt'),L=C.letter.trim();let done=0,tm;
+function typeIt(){if(done)return;done=1;if(RM){lt.textContent=L;return}let i=0;(function n(){lt.textContent=L.slice(0,++i);if(i<L.length)tm=setTimeout(n,45)})()}
+$('#sk').onclick=()=>{clearTimeout(tm);done=1;lt.textContent=L};
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){typeIt();o.disconnect()}},{threshold:.4}).observe(lt);
+$('#wh').onclick=()=>{fireworks();rain()};
+/* clock */
+function tick(){const p=P(),now=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second),td=p.month==AN.month&&p.day==AN.day;
+let Y=p.year-AN.year,M=p.month-AN.month,D=p.day-AN.day,H=p.hour-AN.hour,I=p.minute-AN.minute;
+if(I<0){I+=60;H--}if(H<0){H+=24;D--}if(D<0){D+=new Date(p.year,p.month-1,0).getDate();M--}if(M<0){M+=12;Y--}
+(Y<0?[0,0,0,0,0,0]:[Y,M,D,H,I,p.second]).forEach((n,i)=>nb[i].textContent=n);
+if(td)$('#cd').textContent=X.today;
+else{const ms=Date.UTC(aft(p)?p.year+1:p.year,AN.month-1,AN.day)-now;$('#cd').textContent=fm(X.countdown,{d:Math.floor(ms/864e5),t:`${pad(ms%864e5/36e5|0)}:${pad(ms%36e5/6e4|0)}:${pad(ms%6e4/1e3|0)}`})}
+if(rdy){const m=C.moments.find(m=>p.hour==m.hour&&p.minute==m.minute);if(m){const d=p.year+'-'+p.month+'-'+p.day+'-'+m.hour;if(ST('e')!==d){ST('e',d);openM(m.title,m.text);if(!RM)burst(innerWidth/2,innerHeight/3)}}}}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
